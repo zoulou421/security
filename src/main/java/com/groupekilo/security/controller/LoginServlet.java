@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
         log.info("Email sent is {}", email);
 
         // Simple authentication check (replace with actual authentication logic)
-        if ("user@example.com".equals(email) && "password".equals(password)) {
+        if ("bonevybeby@formationkilo.com".equals(email) && "password".equals(password)) {
             HttpSession session = req.getSession();
             session.setAttribute("username", email); // Set username in session
             resp.sendRedirect(req.getContextPath() + "/welcome"); // Redirect to welcome page
