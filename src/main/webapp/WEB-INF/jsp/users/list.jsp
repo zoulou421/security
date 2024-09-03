@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Admin-List</title>
 </head>
 <body>
 	<jsp:include page="../welcome.jsp"></jsp:include>
@@ -19,12 +20,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>Bonevy</td>
-					<td>BEBY</td>
-					<td>bonevybeby@formationkilo.com</td>
-				</tr>
+				<c:forEach items="${users}" var="user">
+					<tr>
+						<td>${user.id}</td>
+						<td>${user.firstName}</td>
+						<td>${user.lastName}</td>
+						<td>${user.email}</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
