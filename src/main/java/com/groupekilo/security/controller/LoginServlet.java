@@ -29,5 +29,6 @@ public class LoginServlet extends HttpServlet {
      String email=req.getParameter("email");
      String pwd=req.getParameter("password");
      log.info("Email envoyé est {}",email);
+     resp.sendRedirect("welcome");
 	}
 }
