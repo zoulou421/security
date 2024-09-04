@@ -8,12 +8,12 @@ import com.groupekilo.security.entities.UserEntity;
 
 public class UserMapper {
 
-	public List<UserDto> listUserEntityToListUserDto(List<UserEntity> users) {
+	public static List<UserDto> listUserEntityToListUserDto(List<UserEntity> users) {
 		return users.stream()
-				.map(user->this.toUserDto(user)).collect(Collectors.toList());
+				.map(user->toUserDto(user)).collect(Collectors.toList());
 	}
 
-	private UserDto toUserDto(UserEntity user) {
+	private static UserDto toUserDto(UserEntity user) {
 		
 		return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail());
 
