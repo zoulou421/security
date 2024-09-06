@@ -1,9 +1,6 @@
 package com.groupekilo.security.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +13,7 @@ import com.groupekilo.security.service.UserService;
 
 @WebServlet(name = "admin", value = "/admin")
 public class AdminServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	IUserService userService=new UserService();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

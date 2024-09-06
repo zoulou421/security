@@ -1,6 +1,7 @@
 package com.groupekilo.security.controller;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,8 +14,14 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.groupekilo.security.dto.UserDto;
+import com.groupekilo.security.service.IUserService;
+import com.groupekilo.security.service.UserService;
+
 @WebServlet(name = "login", value = "/login")
 public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private IUserService userService=new UserService();
 	/*private Logger log=LoggerFactory.getLogger(LoginServlet.class);
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -52,16 +59,24 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         
         // Log the email for debugging
-        log.info("Email sent is {}", email);
+       // log.info("Email sent is {}", email);
 
         // Simple authentication check (replace with actual authentication logic)
-        if ("bonevybeby@formationkilo.com".equals(email) && "password".equals(password)) {
+       /* if ("bonevybeby@formationkilo.com".equals(email) && "password".equals(password)) {
             HttpSession session = req.getSession();
             session.setAttribute("username", email); // Set username in session
             resp.sendRedirect(req.getContextPath() + "/welcome"); // Redirect to welcome page
         } else {
             // Redirect to login page with error message
             resp.sendRedirect(req.getContextPath() + "/login?error=true");
+        }*/
+        Optional<UserDto>user=userService.login(email, password);
+        if(user.isPresent()) {
+        	req.getSession().setAttribute("username", email);
+        	resp.sendRedirect("welcome");
+        }else {
+        	resp.sendRedirect("login");
         }
+        
     }
 }

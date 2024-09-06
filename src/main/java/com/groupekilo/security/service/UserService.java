@@ -1,6 +1,7 @@
 package com.groupekilo.security.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.groupekilo.security.dao.IUserDao;
 import com.groupekilo.security.dao.UserDao;
@@ -19,6 +20,16 @@ private IUserDao userDao=new UserDao();
 	@Override
 	public boolean save(UserDto userDto) {
 		return userDao.save(UserMapper.toUserEntity(userDto));
+	}
+	@Override
+	public Optional<UserDto> login(String email, String password) {
+		Optional<UserEntity>userEntity=userDao.login(email, password);
+		if(userEntity.isPresent()) {
+			UserEntity user=userEntity.get();
+			return Optional.of(UserMapper.toUserDto(user));
+		}else {
+			return Optional.empty();
+		}
 	}
 
 }
