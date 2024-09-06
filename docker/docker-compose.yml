@@ -10,7 +10,7 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: passer123@
     ports:
-      - 3309:3306
+      - 3306:3306
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:

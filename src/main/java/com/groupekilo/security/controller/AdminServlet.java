@@ -40,5 +40,9 @@ public class AdminServlet extends HttpServlet {
 		String lastName = req.getParameter("lastName");
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
+		
+		UserDto userDto=new UserDto(0,firstName,lastName,email,password);
+		userService.save(userDto);
+		doGet(req, resp);
 	}
 }
