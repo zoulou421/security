@@ -6,4 +6,5 @@ import com.groupekilo.security.dto.UserDto;
 
 public interface IUserService {
   public List<UserDto>getAll();
+  public boolean save(UserDto  userDto);
 }

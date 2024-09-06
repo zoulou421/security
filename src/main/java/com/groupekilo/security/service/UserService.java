@@ -10,10 +10,15 @@ import com.groupekilo.security.mapper.UserMapper;
 
 public class UserService implements IUserService {
 private IUserDao userDao=new UserDao();
-	@Override
+	
+    @Override
 	public List<UserDto> getAll() {
 		//return userDao.list(new UserEntity());
 		return UserMapper.listUserEntityToListUserDto(userDao.list(new UserEntity()));
+	}
+	@Override
+	public boolean save(UserDto userDto) {
+		return userDao.save(UserMapper.toUserEntity(userDto));
 	}
 
 }
