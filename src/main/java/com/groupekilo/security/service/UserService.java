@@ -91,4 +91,11 @@ public class UserService implements IUserService {
 		return true; // Validation passed
 	}
 
+	@Override
+	public List<UserDto> filterGetAll(String filterColumn, String filterValue, String sortColumn, String sortOrder) {
+		return UserMapper.listUserEntityToListUserDto(
+                userDao.myListFilter(new UserEntity(), filterColumn, filterValue, sortColumn, sortOrder));
+		
+	}
+
 }

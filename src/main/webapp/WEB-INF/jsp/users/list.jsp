@@ -10,6 +10,34 @@
 </head>
 <body>
 	 <h1>User List</h1>
+	 
+	 <form method="GET" action="${pageContext.request.contextPath}/admin">
+    <!-- Filtering options -->
+    <label for="filterColumn">Filter By:</label>
+    <select name="filterColumn">
+        <option value="firstName">First Name</option>
+        <option value="lastName">Last Name</option>
+        <option value="email">Email</option>
+    </select>
+    
+    <input type="text" name="filterValue" placeholder="Filter Value" />
+
+    <!-- Sorting options -->
+    <label for="sortColumn">Sort By:</label>
+    <select name="sortColumn">
+        <option value="firstName">First Name</option>
+        <option value="lastName">Last Name</option>
+        <option value="email">Email</option>
+    </select>
+
+    <label for="sortOrder">Order:</label>
+    <select name="sortOrder">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+    </select>
+
+    <button type="submit">Apply</button>
+</form>
     
     <!-- Search Form -->
     <form action="<c:url value='/admin' />" method="get">

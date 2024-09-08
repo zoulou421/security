@@ -14,7 +14,7 @@ import com.groupekilo.security.service.IUserService;
 import com.groupekilo.security.service.UserService;
 
 @WebServlet(name = "admin", value = "/admin")
-public class AdminServlet extends HttpServlet {
+public class AdminServlet2Old extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final IUserService userService = new UserService();
 
@@ -58,9 +58,15 @@ public class AdminServlet extends HttpServlet {
             List<UserDto> searchResults = userService.searchByCriteria(searchTerm);
             req.setAttribute("users", searchResults);
             req.getRequestDispatcher("WEB-INF/jsp/users/list.jsp").forward(req, resp);
+        }// Set default sort order if not provided
+        else if (sortOrder == null || (!"asc".equals(sortOrder) && !"desc".equals(sortOrder))) {
+            sortOrder = "asc";
+        }else if(filterColumn!=null ||filterValue!=null ||sortColumn!=null || sortOrder!=null) {
+        	// Default action is to list users with sorting and filtering
+            req.setAttribute("users", userService.filterGetAll(filterColumn, filterValue, sortColumn, sortOrder));
+            req.getRequestDispatcher("WEB-INF/jsp/users/list.jsp").forward(req, resp);
         }else {
-            // Handle filtering and sorting when no action is provided
-            handleFilterAndSort(req, resp, filterColumn, filterValue, sortColumn, sortOrder);
+        	showUserList(req,resp);
         }
         
     }
@@ -170,13 +176,4 @@ public class AdminServlet extends HttpServlet {
         req.setAttribute("users", userService.getAll());
         req.getRequestDispatcher("WEB-INF/jsp/users/list.jsp").forward(req, resp);
     }
-    
-    private void handleFilterAndSort(HttpServletRequest req, HttpServletResponse resp, String filterColumn, String filterValue, String sortColumn, String sortOrder) throws ServletException, IOException {
-        if (sortOrder == null || (!"asc".equals(sortOrder) && !"desc".equals(sortOrder))) {
-            sortOrder = "asc";  // Default sort order
-        }
-        req.setAttribute("users", userService.filterGetAll(filterColumn, filterValue, sortColumn, sortOrder));
-        req.getRequestDispatcher("WEB-INF/jsp/users/list.jsp").forward(req, resp);
-    }
-
 }

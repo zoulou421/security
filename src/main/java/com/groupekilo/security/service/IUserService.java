@@ -14,5 +14,7 @@ public interface IUserService {
   public boolean delete(long id,UserDto userDto);
   //others methods
   public List<UserDto> searchByCriteria(String searchTerm);
+  public List<UserDto> filterGetAll(String filterColumn, String filterValue,
+		  String sortColumn, String sortOrder);
  
 }
