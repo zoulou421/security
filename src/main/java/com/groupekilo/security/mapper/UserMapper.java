@@ -13,9 +13,16 @@ public class UserMapper {
 		return users.stream().map(user -> toUserDto(user)).collect(Collectors.toList());
 	}
 
-	public static UserDto toUserDto(UserEntity user) {
+	/*public static UserDto toUserDto(UserEntity user) {
 
 		return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+	}*/
+	public static UserDto toUserDto(UserEntity user) {
+	    if (user != null) {
+	        return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+	    } else {
+	        return null;
+	    }
 	}
 
 	public static UserEntity toUserEntity(UserDto user) {
@@ -23,5 +30,11 @@ public class UserMapper {
 		return new UserEntity(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(),
 				user.getPassword());
 	}
+	
+	
+
+
+
+	
 
 }

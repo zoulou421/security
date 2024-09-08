@@ -1,5 +1,6 @@
 package com.groupekilo.security.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -33,6 +34,22 @@ public class UserDao extends RepositoryImpl<UserEntity> implements IUserDao{
 		}catch(Exception e) {
 			return Optional.empty();
 		}
+		//return Optional.ofNullable(session.createQuery(cr).getSingleResult());
 	}
+
+	// Method to search users by name or email
+    public List<UserEntity> searchByCriteria(String searchTerm) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
+        Root<UserEntity> root = cq.from(UserEntity.class);
+
+        Predicate firstNamePredicate = cb.like(root.get("firstName"), "%" + searchTerm + "%");
+        Predicate lastNamePredicate = cb.like(root.get("lastName"), "%" + searchTerm + "%");
+        Predicate emailPredicate = cb.like(root.get("email"), "%" + searchTerm + "%");
+        cq.where(cb.or(firstNamePredicate, lastNamePredicate, emailPredicate));
+
+        return session.createQuery(cq).getResultList();
+    }
 
 }

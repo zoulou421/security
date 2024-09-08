@@ -5,56 +5,54 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin-List</title>
+<title>User List</title>
+<link rel="stylesheet" href="<c:url value='/styles/main.css' />">
 </head>
 <body>
-	<jsp:include page="../welcome.jsp"></jsp:include>
-	<div class="container">
-		<table class="table">
-			<thead>
+	 <h1>User List</h1>
+    
+    <!-- Search Form -->
+    <form action="<c:url value='/admin' />" method="get">
+        <input type="hidden" name="action" value="search" />
+        <input type="text" name="search" placeholder="Search by name or email" />
+        <input type="submit" value="Search" />
+    </form><br />
+    
+	<a href="<c:url value='/admin?action=add' />">Add New User</a>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="user" items="${users}">
 				<tr>
-					<th>ID</th>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Email</th>
+					<td>${user.id}</td>
+					<td>${user.firstName}</td>
+					<td>${user.lastName}</td>
+					<td>${user.email}</td>
+					<td>
+					    <a href="<c:url value='/admin?action=delete&id=${user.id}' />"
+                           onclick="return confirmDeletion();">Delete</a>
+					</td>
+					<td><a
+						href="<c:url value='/admin?action=edit&id=${user.id}' />">Edit</a>
+					</td>
 				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${users}" var="user">
-					<tr>
-						<td>${user.id}</td>
-						<td>${user.firstName}</td>
-						<td>${user.lastName}</td>
-						<td>${user.email}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
-	
-	<!-- Debut ajout FORM -->
-	<div class="container">
-			<form action="admin" method="post">
-			  <div class="mb-3">
-			    <label for="exampleInputEmail1" class="form-label">First name</label>
-			    <input type="text" name="firstName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-			  </div>
-			  <div class="mb-3">
-			    <label for="exampleInputEmail1" class="form-label">Last name</label>
-			    <input type="text" name="lastName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-			  </div>
-			  <div class="mb-3">
-			    <label for="exampleInputEmail1" class="form-label">Email address</label>
-			    <input type="text" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-			  </div>
-			  <div class="mb-3">
-			    <label for="exampleInputPassword1" class="form-label">Password</label>
-			    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-			  </div>
-			  
-			  <button type="submit" class="btn btn-primary">Submit</button>
-			</form>
-		</div>
-	<!-- Fin ajout Form -->
+			</c:forEach>
+		</tbody>
+	</table>
+
+	<script type="text/javascript">
+		function confirmDeletion() {
+			return confirm('Are you sure you want to delete this user?');
+		}
+	</script>
+
 </body>
 </html>

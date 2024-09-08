@@ -56,6 +56,7 @@ public class RepositoryImpl<T> implements Repository<T> {
 		}
 	}
 	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> list(T t) {
@@ -76,6 +77,8 @@ public class RepositoryImpl<T> implements Repository<T> {
 		
         return (T) session.get(t.getClass(), id);
 	}
+
+
 
 	
 }

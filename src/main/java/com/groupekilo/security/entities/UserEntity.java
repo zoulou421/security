@@ -13,7 +13,7 @@ public class UserEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	 private int id;
+	 private long id;
 	@Column(name="firstName",length=250,nullable=false)
 	 private String firstName;
 	@Column(name="lastName",length=200,nullable=false)
@@ -37,7 +37,7 @@ public class UserEntity {
 	}
 
 	public int getId() {
-		return id;
+		return (int) id;
 	}
 	public void setId(int id) {
 		this.id = id;
