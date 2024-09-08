@@ -10,4 +10,9 @@ public interface IUserDao extends Repository<UserEntity> {
  public List<UserEntity> searchByCriteria(String searchTerm);
  
  public List<UserEntity> myListFilter(UserEntity entity, String filterColumn, String filterValue, String sortColumn, String sortOrder);
+
+
+ public List<UserEntity> getPaginatedUsers(int page, int pageSize);
+ public int countAllUsers(); // To get total number of users for pagination
+ 
 }

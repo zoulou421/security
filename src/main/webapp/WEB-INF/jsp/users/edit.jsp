@@ -27,7 +27,9 @@
         <button type="submit">Update User</button>
     </form>
     <br>
-    <a href="<c:url value='/admin?action=list' />">Back to List</a>
+    <!--a href="<c:url value='/admin?action=list' />">Back to List</a-->
+    <!--  a href="<c:url value='/admin?action=list' />">Back to List</a-->
+    <a href="${pageContext.request.contextPath}/admin?action=list">Back to List</a>
     <c:if test="${not empty error}">
         <p style="color:red;">${error}</p>
     </c:if>

@@ -76,4 +76,24 @@ public class UserDao extends RepositoryImpl<UserEntity> implements IUserDao {
 		return query.list();
 	}
 
+	@Override
+	public List<UserEntity> getPaginatedUsers(int page, int pageSize) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+        Query<UserEntity> query = session.createQuery("FROM UserEntity", UserEntity.class);
+        query.setFirstResult((page - 1) * pageSize);
+        query.setMaxResults(pageSize);
+        List<UserEntity> result = query.getResultList();
+        session.close();
+        return result;
+	}
+
+	@Override
+	public int countAllUsers() {
+		 Session session = HibernateUtil.getSessionFactory().openSession();
+	        Query<Long> query = session.createQuery("SELECT COUNT(*) FROM UserEntity", Long.class);
+	        Long count = query.getSingleResult();
+	        session.close();
+	        return count.intValue();
+	}
+
 }

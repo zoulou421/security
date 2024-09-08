@@ -2,6 +2,7 @@ package com.groupekilo.security.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.groupekilo.security.dao.IUserDao;
 import com.groupekilo.security.dao.UserDao;
@@ -97,5 +98,18 @@ public class UserService implements IUserService {
                 userDao.myListFilter(new UserEntity(), filterColumn, filterValue, sortColumn, sortOrder));
 		
 	}
+
+	@Override
+	public List<UserDto> getPaginatedUsers(int page, int pageSize) {
+		List<UserEntity> entities = userDao.getPaginatedUsers(page, pageSize);
+        return entities.stream().map(UserMapper::toUserDto).collect(Collectors.toList());
+	}
+
+	@Override
+	public int getTotalUserCount() {
+		  return userDao.countAllUsers();
+	}
+	
+	
 
 }

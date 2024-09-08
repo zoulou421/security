@@ -75,7 +75,14 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
+ <!-- Pagination Controls -->
+    <!-->div>
+        <a href="<c:url value='/admin?page=1' />">First</a>
+        <a href="<c:url value='/admin?page=${currentPage - 1}' />">Previous</a>
+        <a href="<c:url value='/admin?page=${currentPage + 1}' />">Next</a>
+        <a href="<c:url value='/admin?page=${totalPages}' />">Last</a>
+    </div-->
+    
 	<script type="text/javascript">
 		function confirmDeletion() {
 			return confirm('Are you sure you want to delete this user?');

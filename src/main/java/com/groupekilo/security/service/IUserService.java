@@ -16,5 +16,7 @@ public interface IUserService {
   public List<UserDto> searchByCriteria(String searchTerm);
   public List<UserDto> filterGetAll(String filterColumn, String filterValue,
 		  String sortColumn, String sortOrder);
+  public List<UserDto> getPaginatedUsers(int page, int pageSize);
+  public int getTotalUserCount();
  
 }
